@@ -1,14 +1,40 @@
 #pragma once
 #include <cstdint>
+#include "component_manager.h"
 #include "component.h"
 #include <array>
 
-namespace Shaniss::Core
+namespace ShanissCore
 {
     const unsigned int MAX_ENTITIES = 5000;
 
-    const std::size_t MAX_COMPONENTS = 64;
-    using ComponentArray = std::array<Component*, MAX_COMPONENTS>;
+    /*
+    Entity
+
+        Every entity holds an id, which is used to reference its components under ComponentCollection,
+        which are all managed by ComponentManager.
+
+        All entities hold a pointer that refers to the ComponentManager (singleton), and its own hascomp,
+        getcomp, addcomp, etc all utilize it to manage components.
+
+        Upon destruction, the entity id is flagged for reusage (the constructor will call a helper method
+        to recycle entity IDs)
+
+        Usage:
+            Entity entity();
+
+            entity.hasComponent<Transform>();
+
+            entity.getComponent<Transform>().position = 10;
+
+            entity.addComponent<Transform>();
+
+        As all of the methods are handled by Entity itself, there is no need for an EntityManager,
+        and therefore it does not exist. (May change? Suggestion: have entityManager over singular static
+        method to handle EIDs)
+
+    */
+
 
     // template<typename T>
     class Entity
@@ -16,9 +42,10 @@ namespace Shaniss::Core
     public:
         
         const int id;
+        
 
         // make sure assigning ids in constructor takes account of freed up entity ids
-        Entity(int id);
+        Entity();
 
         template<class T>
         bool hasComponent() const;
@@ -35,6 +62,8 @@ namespace Shaniss::Core
         // this needs to allow for what is said to describe constructor above (track free'd eIDs)
         void destroy();
 
+    private:
+        ComponentManager* compManager;
 
 
     };

@@ -2,15 +2,18 @@
 #include <cstdint>
 
 
-namespace Shaniss::Core {
+namespace ShanissCore {
 
-	Entity::Entity(int id): id(id) { // write helper function for recycling id behavior, like ``: id(func(id))``
+	// write static helper function for recycling id behavior, like ``: id(func(id))``
+	Entity::Entity(): id(id), compManager(compManager) { 
+
 	}
 
 	template<class T>
 	bool Entity::hasComponent() const {
-		return
+		// return
 		// get component array equivalent of unordered_map::contains()?
+
 	}
 
 	template<class T>

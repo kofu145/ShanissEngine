@@ -1,34 +1,14 @@
 #pragma once
+#include <type_traits>
 
 
-namespace Shaniss::Core {
-	
-	struct ComponentCounter
-	{
-		static inline int componentCounter;
-	};
+namespace ShanissCore {
 
+	// purely exists to serve as a base class, every component MUST inherit this.
 	class Component
 	{
+		// just in case, for now
+		static int componentID;
 
-	private:
-
-		static inline int componentID()
-		{
-			static int componentID = ComponentCounter::componentCounter++;
-			return componentID;
-		}
-	
 	};
-
-	/*
-	// Util method for getting family given type
-
-	template <typename C>
-	static int GetComponentID() {
-	  return Component<typename std::remove_const<C>::type>::componentID();
-	}
-	  // mat want equiv to this?
-	*/
-
 }
