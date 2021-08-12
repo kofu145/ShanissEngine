@@ -1,1 +1,1 @@
-#include "ShanissEngine/component_collection.h"
+#include "src/component_manager.h"
