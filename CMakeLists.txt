@@ -5,7 +5,6 @@ cmake_minimum_required (VERSION 3.8)
 
 project ("ShanissEngine")
 
-include_directories(src test)
 
 # Add source to this project's executable.
 # TODO: setup glob to auto grab every needed file
@@ -25,7 +24,12 @@ add_library (ShanissEngine SHARED
 "src/component_manager.h" 
 "src/component_manager.cpp" 
 "src/component_collection.cpp"
+"test/bla.cpp"
 )
+
+target_include_directories(ShanissEngine PUBLIC ${CMAKE_SOURCE_DIR})
+
+
 
 # TODO: Add tests and install targets if needed.
 set_property (TARGET ${PROJECT_NAME}
