@@ -9,11 +9,33 @@ namespace ShanissCore
 	class ComponentManager {
 		
 		public:
-			// this is the key to EVERYTHING, it is what it says it is
+
+			static ComponentManager* getInstance();
+
+			void clear();
+
+			
 			template<typename ComponentType>
 			ComponentCollection<ComponentType> getComponentArray();
 
+
+
 		private:
+
+			static std::unique_ptr<ComponentManager> instance;
+
+			ComponentManager(const ComponentManager& arg) = delete;					// Copy constructor
+			ComponentManager(const ComponentManager&& arg) = delete;				// Move constructor
+			ComponentManager& operator=(const ComponentManager& arg) = delete;		// Assignment operator
+			ComponentManager& operator=(const ComponentManager&& arg) = delete;		// Move operator
+
+			// Private constructor so no objects can be created, use getinstance
+			ComponentManager();
+			~ComponentManager();
+
+			
+
+
 			// store all the component arrays for every type
 			// note: MUST store pointers of base derived class
 

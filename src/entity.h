@@ -54,16 +54,15 @@ namespace ShanissCore
         T& getComponent() const;
 
         template<class T>
-        T& addComponent();
+        T& addComponent(T component);
 
         template<class T>
         void removeComponent();
 
         // this needs to allow for what is said to describe constructor above (track free'd eIDs)
         void destroy();
-
+    
     private:
-        ComponentManager* compManager;
 
 
     };

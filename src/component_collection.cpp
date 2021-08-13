@@ -3,6 +3,14 @@
 
 namespace ShanissCore {
 
+	template<class T>
+	T& ComponentCollection<T>::getData(int entityID)
+	{
+		assert(!this->hasEntity(entityID) && "Attempting to retrieve non-existant component!");
+
+		// give a reference to component owned by said entity
+		return components[entityID];
+	}
 
 	template<class T>
 	void ComponentCollection<T>::insertData(int entityID, T component) {

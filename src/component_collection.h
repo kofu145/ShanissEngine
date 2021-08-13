@@ -21,6 +21,8 @@ namespace ShanissCore
 
 	public:
 
+		ComponentType& getData(int entityID);
+
 		void insertData(int entityID, ComponentType component);
 
 		void removeData(int entityID);
