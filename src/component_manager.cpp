@@ -3,12 +3,23 @@
 
 namespace ShanissCore {
 
-    std::unique_ptr<ComponentManager> ShanissCore::ComponentManager::instance = nullptr;
+    // alias cause original type is too long
+    ComponentManager::componentManagerPtr ShanissCore::ComponentManager::instance = nullptr;
+
+    ComponentManager::ComponentManager(): 
+    componentCollections(
+        std::unordered_map<const char*, std::shared_ptr<IComponentCollection>>()
+    )
+    
+    {
+
+    }
+
 
     ComponentManager* ComponentManager::getInstance()
     {
         if (ComponentManager::instance == nullptr){
-            ComponentManager::instance = std::unique_ptr<ComponentManager>(new ComponentManager());
+            ComponentManager::instance = ComponentManager::componentManagerPtr(new ComponentManager(), Deleter<ComponentManager>());
 
         }
     
@@ -24,8 +35,8 @@ namespace ShanissCore {
     ComponentCollection<ComponentType> ComponentManager::getComponentArray()
     {
         // do the fuckin shit where u make the thing (inst new compcolle if non existant)
-
-        return static_cast<ComponentCollection<ComponentType>*>(componentCollections[typeid(ComponentType)]);
+        const char* typeName = typeid(ComponentType).name();
+        return static_cast<ComponentCollection<ComponentType>*>(componentCollections[typeName]);
     
 
     

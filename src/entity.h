@@ -34,9 +34,7 @@ namespace ShanissCore
         method to handle EIDs)
 
     */
-
-
-    // template<typename T>
+    
     class Entity
     {
     public:

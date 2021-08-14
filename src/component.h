@@ -4,7 +4,7 @@
 
 namespace ShanissCore {
 
-	// purely exists to serve as a base class, every component MUST inherit this.
+	// Base class for all components. Every component MUST inherit this.
 	class Component
 	{
 		// just in case, for now

@@ -8,13 +8,14 @@ namespace ShanissCore
 	// this const doesn't actually matter until (if doing) bitset is used.
 	const std::size_t MAX_COMPONENTS = 64;
 
-
+	// Base abstract class (interface) that ComponentCollection derives from. (DO NOT USE)
 	class IComponentCollection
 	{
 	public:
 		virtual ~IComponentCollection() = default;
 	}; 
 
+	// A collection of components (unordered map) for storing entity component data
 	template<class ComponentType>
 	class ComponentCollection : public IComponentCollection
 	{

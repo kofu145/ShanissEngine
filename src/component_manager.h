@@ -5,10 +5,23 @@
 
 namespace ShanissCore
 {
+
+	
+	template<class T>
+	class Deleter;
+
 	// TODO: make this a singleton so that we can access it for our entity methods
+
+	// A singleton that manages all the ComponentCollections
 	class ComponentManager {
 		
+
 		public:
+
+			friend class Deleter<ComponentManager>;
+
+
+			using componentManagerPtr = std::unique_ptr<ComponentManager, Deleter<ComponentManager>>;
 
 			static ComponentManager* getInstance();
 
@@ -18,21 +31,19 @@ namespace ShanissCore
 			template<typename ComponentType>
 			ComponentCollection<ComponentType> getComponentArray();
 
-
+	
 
 		private:
 
-			static std::unique_ptr<ComponentManager> instance;
+			static std::unique_ptr<ComponentManager, Deleter<ComponentManager>> instance;
 
-			ComponentManager(const ComponentManager& arg) = delete;					// Copy constructor
-			ComponentManager(const ComponentManager&& arg) = delete;				// Move constructor
-			ComponentManager& operator=(const ComponentManager& arg) = delete;		// Assignment operator
-			ComponentManager& operator=(const ComponentManager&& arg) = delete;		// Move operator
+			// please work
+			//ComponentManager (const ComponentManager&) = delete;
+			//ComponentManager& operator = (const ComponentManager&) = delete;
 
 			// Private constructor so no objects can be created, use getinstance
 			ComponentManager();
 			~ComponentManager();
-
 			
 
 
@@ -40,8 +51,24 @@ namespace ShanissCore
 			// note: MUST store pointers of base derived class
 
 			// if efficiency issues regarding this, replace type_info with char and change up all key def
-			std::unordered_map<std::type_info, std::shared_ptr<IComponentCollection>> componentCollections;
+			std::unordered_map<const char*, std::shared_ptr<IComponentCollection>> componentCollections;
 
 
 	};
+
+
+
+	template<class T>
+	class Deleter
+	{
+
+
+		// making the operator private doesn't work even with this friend and idk why :(
+		friend ComponentManager::componentManagerPtr;
+		
+		public:
+			void operator()(T* t) { delete t; };
+
+	};
+
 }
