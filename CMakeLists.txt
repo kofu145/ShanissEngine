@@ -17,13 +17,15 @@ project ("ShanissEngine")
 add_library (ShanissEngine SHARED 
 "src/ShanissEngine.cpp" 
 "src/ShanissEngine.h"  
-"src/entity.cpp" 
-"src/entity.h" 
-"src/component.h" 
-"src/component_collection.h" 
-"src/component_manager.h" 
-"src/component_manager.cpp" 
-"src/component_collection.cpp"
+"src/ecs/entity.cpp" 
+"src/ecs/entity.h" 
+"src/ecs/component.h" 
+"src/ecs/component_collection.h" 
+"src/ecs/component_manager.h" 
+"src/ecs/component_manager.cpp" 
+"src/ecs/component_collection.cpp"
+"src/ecs/system.h"
+"src/gamestate.h"
 "test/bla.cpp"
 )
 

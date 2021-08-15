@@ -10,8 +10,6 @@ namespace ShanissCore
 	template<class T>
 	class Deleter;
 
-	// TODO: make this a singleton so that we can access it for our entity methods
-
 	// A singleton that manages all the ComponentCollections
 	class ComponentManager {
 		
