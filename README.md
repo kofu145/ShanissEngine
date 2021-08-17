@@ -1,2 +1,2 @@
 # ShanissEngine
- C++ ECS Engine for personal usage.
+ C++ ECS Game Engine, using C# as a scripting interface.
